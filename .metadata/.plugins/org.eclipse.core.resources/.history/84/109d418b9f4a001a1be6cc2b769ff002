@@ -1,0 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Somando</title>
+</head>
+<body>
+<%
+
+int numero1 = Integer.parseInt(request.getParameter("numero1"));
+int numero2 = Integer.parseInt(request.getParameter("numero2"));
+String operacao = request.getParameter("operacao");
+
+switch(operacao){
+	case "Soma":
+		out.print(numero1+numero2);
+	break;
+};
+
+%>
+</body>
+</html>

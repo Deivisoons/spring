@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Testando GET e POST</title>
+</head>
+<body>
+<%
+//Obtendo nome
+  String nome = request.getParameter("nome");
+//Obtendo idade
+  int idade = Integer.parseInt(request.getParameter("idade"));
+//Exibindo
+  out.print("O nome informado é "+nome+", e idade informada é "+idade+"!");
+%>
+</body>
+</html>

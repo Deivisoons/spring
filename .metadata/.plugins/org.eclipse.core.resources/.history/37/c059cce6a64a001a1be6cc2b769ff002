@@ -1,0 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Inserindo Tabuada</title>
+</head>
+<body>
+
+<%
+
+int tabuada = Integer.parseInt(request.getParameter("numero"));
+int x = 0;
+
+for(x = 0; x <= 10; x++){
+   System.out.print("Tabuada do: " + tabuada);
+   System.out.print(x + " x " + tabuada + " = ");
+   System.out.println(x * tabuada);
+}
+
+%>
+</body>
+</html>

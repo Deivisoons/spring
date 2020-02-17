@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Medias</title>
+</head>
+<body>
+<%
+
+ float nome = request.getParameter("nome");
+ float n1 = request.getParameter("nota1");
+ float n2 = request.getParameter("nota2");
+ float n3 = request.getParameter("nota3");
+ float media = (nota1+nota2+nota3)/3;
+ 
+ if(media >= 7){
+ out.print("Você está Aprovado!");
+ }else if(media >=5){
+ out.print("Você está em exame!");
+ }else{
+ out.print("Você está reprovado");
+ 
+%>
+</body>
+</html>

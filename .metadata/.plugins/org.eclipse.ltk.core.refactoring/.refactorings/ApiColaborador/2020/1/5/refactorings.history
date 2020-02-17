@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.colaborador.modelo.Colaborador&apos; to &apos;ColaboradorModelo&apos;&#x0D;&#x0A;- Original project: &apos;ApiColaborador&apos;&#x0D;&#x0A;- Original element: &apos;com.colaborador.modelo.Colaborador&apos;&#x0D;&#x0A;- Renamed element: &apos;com.colaborador.modelo.ColaboradorModelo&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Colaborador&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src\/main\/java&lt;com.colaborador.modelo{Colaborador.java[Colaborador" matchStrategy="1" name="ColaboradorModelo" qualified="false" references="true" similarDeclarations="false" stamp="1580478776765" textual="false" version="1.0"/>
+</session>

@@ -1,0 +1,70 @@
+package com.api.projeto.controle;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.api.projeto.modelo.ProdutoModelo;
+import com.api.projeto.modelo.RespostaModelo;
+import com.api.projeto.modelo.UsuarioModelo;
+import com.api.projeto.repositorio.ProdutoRepositorio;
+
+@RestController
+@RequestMapping("/api")
+public class ProdutoControle {
+	
+	@Autowired
+	private ProdutoRepositorio produtoRepositorio;
+	
+	@RequestMapping(value="/produto", method=RequestMethod.POST)
+	public @ResponseBody RespostaModelo cadastrar(@RequestBody ProdutoModelo produto) {
+		try {
+			this.produtoRepositorio.save(produto);
+			return new RespostaModelo("Cadastro realizado com sucesso");
+		}catch(Exception erro) {
+			return new RespostaModelo("Falha ao cadastrar");
+		}
+	}
+	
+	@RequestMapping(value="/produto", method=RequestMethod.GET)
+	public @ResponseBody List<ProdutoModelo> listar(){
+		return this.produtoRepositorio.findAll();
+	}
+	
+	@RequestMapping(value="/produto/{codigo}", method=RequestMethod.GET)
+	public ProdutoModelo obterProduto(@PathVariable("codigo") Integer codigo) {
+	return produtoRepositorio.findByCodigo(codigo);
+	}
+	
+	@RequestMapping(value="/produto/{codigo}", method=RequestMethod.DELETE)
+	public @ResponseBody RespostaModelo excluir(@PathVariable("codigo") Integer codigo) {
+		
+		ProdutoModelo obj = produtoRepositorio.findByCodigo(codigo);
+		try {
+			this.produtoRepositorio.delete(obj);
+			return new RespostaModelo("Produto removido com sucesso");
+		}catch(Exception erro) {
+			return new RespostaModelo("Falha ao remover"+erro.getMessage());
+		}
+		
+	}
+	
+	@RequestMapping(value="/produto", method=RequestMethod.PUT)
+	public @ResponseBody RespostaModelo alterar(@RequestBody ProdutoModelo produto){
+		try {
+			this.produtoRepositorio.save(produto);
+			return new RespostaModelo("Alteração realizada com sucesso");
+		}catch(Exception erro) {
+			return new RespostaModelo("Falha ao alterar"+erro.getMessage());
+		}
+	}
+	
+	
+
+}

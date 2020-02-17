@@ -1,0 +1,80 @@
+package com.api.projeto.controle;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.api.projeto.modelo.RespostaModelo;
+import com.api.projeto.modelo.UsuarioModelo;
+import com.api.projeto.repositorio.UsuarioRepositorio;
+
+@RestController
+@RequestMapping("/api")
+public class UsuarioControle {
+	
+	private static final RequestMethod[] R = null;
+	@Autowired
+	private UsuarioRepositorio usuarioRepositorio;
+	
+	@RequestMapping(value="usuario", method=RequestMethod.POST)
+	public @ResponseBody RespostaModelo cadastrar(@RequestBody UsuarioModelo usuario) {
+		try {
+			this.usuarioRepositorio.save(usuario);
+			return new RespostaModelo("Cadastro realizado com sucesso!");
+			
+		}catch(Exception erro) {
+			return new RespostaModelo("Falha ao cadastrar");	
+		}
+	}
+	
+	@RequestMapping(value="/usuario", method=RequestMethod.GET)
+	public @ResponseBody List<UsuarioModelo> listar(){
+		return this.usuarioRepositorio.findAll();
+	}
+	
+	@RequestMapping(value="/usuario/{codigo}", method=RequestMethod.GET)
+	public UsuarioModelo obterUsuario(@PathVariable("codigo") Integer codigo) {
+		return this.usuarioRepositorio.findByCodigo(codigo);
+	}
+	
+	@RequestMapping(value="/usuario/{codigo}", method=RequestMethod.DELETE)
+	public @ResponseBody RespostaModelo excluir(@PathVariable("codigo") Integer codigo) {
+		
+		UsuarioModelo obj = usuarioRepositorio.findByCodigo(codigo);
+		
+		try {
+			this.usuarioRepositorio.delete(obj);
+			return new RespostaModelo("Remivido com sucesso!");
+		}catch(Exception erro) {
+			return new RespostaModelo("Falha ao remover"+erro.getMessage());
+			
+		}
+	
+	}
+	
+	@RequestMapping(value="/usuario", method=RequestMethod.PUT)
+	public @ResponseBody RespostaModelo alterar(@RequestBody UsuarioModelo usuario){
+		try {
+			this.usuarioRepositorio.save(usuario);
+			return new RespostaModelo("Alteração realizada com sucesso");
+		}catch(Exception erro) {
+			return new RespostaModelo("Falha ao alterar"+erro.getMessage());
+		}
+	}
+	
+	@RequestMapping(value="/usuario/email/senha", method = RequestMethod.GET)
+	public @ResponseBody UsuarioModelo autenticar(@PathVariable("email") String email, @PathVariable("senha") String senha) {
+		return this.usuarioRepositorio.findByEmailAndSenha(email, senha);
+	}
+	
+
+	
+
+}

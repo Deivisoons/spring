@@ -1,0 +1,71 @@
+package com.colaborador.ApiColaborador.controle;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.colaborador.ApiColaborador.modelo.ColaboradorModelo;
+import com.colaborador.ApiColaborador.modelo.RespostaModelo;
+import com.colaborador.ApiColaborador.repositorio.ColaboradorRepositorio;
+
+@CrossOrigin(origins="http://localhost:4200")
+@RestController
+@RequestMapping("/api")
+public class ColaboradorControle {
+	
+	@Autowired
+	private ColaboradorRepositorio colaboradorRepositorio;
+	
+	@RequestMapping(value="/colaborador", method=RequestMethod.POST)
+	public @ResponseBody RespostaModelo cadastrar(@RequestBody ColaboradorModelo colaborador) {
+		try {
+			this.colaboradorRepositorio.save(colaborador);
+			return new RespostaModelo("Cadastro realizado com sucesso");
+		}catch(Exception erro) {
+			return new RespostaModelo("Falha ao cadastrar "+erro.getMessage());
+		}
+	}
+	
+	@RequestMapping(value="/colaborador", method=RequestMethod.GET)
+	public @ResponseBody List<ColaboradorModelo> Listar(){
+		return this.colaboradorRepositorio.findAll();
+	}
+	
+	@RequestMapping(value="/colaborador/{codigo}", method=RequestMethod.GET)
+	public @ResponseBody ColaboradorModelo consultar(@PathVariable("codigo") Integer codigo){
+		return this.colaboradorRepositorio.findByCodigo(codigo);
+	}
+	
+	@RequestMapping(value="/colaborador/{codigo}", method=RequestMethod.DELETE)
+	public @ResponseBody RespostaModelo excluir(@PathVariable("codigo") Integer codigo) {
+		
+		ColaboradorModelo obj = colaboradorRepositorio.findByCodigo(codigo);
+		
+		try {
+			this.colaboradorRepositorio.delete(obj);
+			return new RespostaModelo("Removido com sucesso");
+		}catch(Exception erro) {
+			return new RespostaModelo("Falha ao remover: "+erro.getMessage());
+		}
+		
+	}
+	
+	@RequestMapping(value="/colaborador", method=RequestMethod.PUT)
+	public @ResponseBody RespostaModelo atualizar(@RequestBody ColaboradorModelo colaborador) {
+		try {
+			this.colaboradorRepositorio.save(colaborador);
+			return new RespostaModelo("Alteração realizada com sucesso");
+		}catch(Exception erro) {
+			return new RespostaModelo("Falha ao alterar "+erro.getMessage());
+		}
+		
+	}
+
+}
+	

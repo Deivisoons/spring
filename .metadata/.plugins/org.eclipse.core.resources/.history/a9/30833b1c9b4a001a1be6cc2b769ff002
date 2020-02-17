@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Cadastro </title>
+</head>
+<body>
+<form action="receberSoma.jsp" method="post">
+
+<label>1º Numero</label>
+<input type="number" name="nome" size="30" placeholder="Numero 1">
+<br><br>
+<label>2º Numero</label>
+<input type="number" name="idade" size="30" placeholder="Numero 2">
+<br><br>
+<input type="submit" value="Somar">
+</form>
+
+</body>
+</html>
